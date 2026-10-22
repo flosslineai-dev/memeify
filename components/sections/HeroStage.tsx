@@ -10,9 +10,10 @@ import { CommentBubble, MemeifyAvatar, SocialPost } from "@/components/ui/Social
 import { GlowShell, TokenCard } from "@/components/ui/TokenCard";
 import { cn } from "@/lib/cn";
 import { EXAMPLES } from "@/lib/samples";
+import { MENTION } from "@/lib/site";
 
 const EX = EXAMPLES[0];
-const COMMENT = "@memeify make this $DOGGO";
+const COMMENT = EX.comment.text;
 const STEPS = ["Reading the post", "Generating artwork", "Writing token metadata", "Building the preview"];
 
 type Phase = 0 | 1 | 2 | 3 | 4;
@@ -63,7 +64,7 @@ export function HeroStage() {
   return (
     <div ref={ref} className="relative mx-auto w-full max-w-[560px] pb-2">
       <p className="sr-only">
-        Animated example: Maya replies to Alex’s dog photo with “@memeify make this $DOGGO”, and Memeify turns
+        Animated example: Maya replies to Alex’s dog photo with “{COMMENT}”, and Memeify turns
         the post into a DOGGO token preview with the status Preview Ready.
       </p>
 
@@ -94,7 +95,7 @@ export function HeroStage() {
       </motion.div>
 
       {/* the comment */}
-      <div className="relative z-10 -mt-8 min-h-[86px] w-[90%] sm:w-[78%]">
+      <div className="relative z-10 -mt-8 min-h-[106px] w-[90%] sm:min-h-[86px] sm:w-[78%]">
         <AnimatePresence>
           {p >= 1 && (
             <motion.div
@@ -222,7 +223,7 @@ function WaitingSlot({ detected }: { detected: boolean }) {
               Ticker <span className="font-semibold text-brand">$DOGGO</span> · warming up
             </>
           ) : (
-            "Tag @memeify with a $TICKER"
+            `Tag ${MENTION} with a $TICKER`
           )}
         </p>
       </div>
